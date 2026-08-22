@@ -9,11 +9,13 @@ import { weddingAudio } from '../utils/audioPlayer';
 
 export const VideoSection: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   /*
    * Pause the existing wedding background music.
-   * The WeddingAudioPlayer keeps the current music position.
+   * Current music position is preserved.
    */
   const pauseBackgroundMusic = () => {
     weddingAudio.pause();
@@ -24,12 +26,14 @@ export const VideoSection: React.FC = () => {
    * from the position where it was paused.
    */
   const resumeBackgroundMusic = () => {
-    weddingAudio.play();
+    weddingAudio.play().catch(() => {
+      // Browser may block playback in some cases.
+    });
   };
 
   /*
-   * Start the video.
-   * Background music is stopped immediately.
+   * Start video.
+   * Background music pauses immediately.
    */
   const handleStartPlay = () => {
     pauseBackgroundMusic();
@@ -37,37 +41,109 @@ export const VideoSection: React.FC = () => {
   };
 
   /*
-   * Once the video element is created, make sure
-   * background music stays paused while video is playing.
+   * Video starts playing.
+   * Background music must stay paused.
+   */
+  const handleVideoPlay = () => {
+    pauseBackgroundMusic();
+  };
+
+  /*
+   * Video is manually paused.
+   * Background music resumes.
+   *
+   * We check !video.ended so that the ended event
+   * remains responsible for completed videos.
+   */
+  const handleVideoPause = () => {
+    const video = videoRef.current;
+
+    if (!video) return;
+
+    if (!video.ended) {
+      resumeBackgroundMusic();
+    }
+  };
+
+  /*
+   * Video completely finished.
+   * Background music resumes.
+   */
+  const handleVideoEnded = () => {
+    resumeBackgroundMusic();
+  };
+
+  /*
+   * When the video section leaves the viewport
+   * because the user scrolls away, resume music.
+   *
+   * We do NOT stop the video here.
+   * We simply pause the video and resume the website music.
+   */
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+
+    if (!section || !video || !isPlaying) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+
+        if (!entry.isIntersecting) {
+          /*
+           * User scrolled away from the video section.
+           * Pause video and resume website music.
+           */
+          if (!video.paused && !video.ended) {
+            video.pause();
+          } else {
+            resumeBackgroundMusic();
+          }
+        }
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isPlaying]);
+
+  /*
+   * Attach video event listeners.
    */
   useEffect(() => {
     if (!isPlaying || !videoRef.current) return;
 
     const video = videoRef.current;
 
-    const handleVideoPlay = () => {
-      pauseBackgroundMusic();
-    };
-
-    const handleVideoEnded = () => {
-      resumeBackgroundMusic();
-    };
-
     video.addEventListener('play', handleVideoPlay);
+    video.addEventListener('pause', handleVideoPause);
     video.addEventListener('ended', handleVideoEnded);
 
+    /*
+     * Start video automatically after switching
+     * from thumbnail to actual video.
+     */
     video.play().catch(() => {
       // Native video controls remain available.
     });
 
     return () => {
       video.removeEventListener('play', handleVideoPlay);
+      video.removeEventListener('pause', handleVideoPause);
       video.removeEventListener('ended', handleVideoEnded);
     };
   }, [isPlaying]);
 
   return (
     <section
+      ref={sectionRef}
       id="video"
       className="py-24 px-6 sm:px-12 lg:px-20 bg-[#0d1630] relative overflow-hidden border-t border-b border-[#d4af6a]/30"
     >
@@ -255,8 +331,9 @@ export const VideoSection: React.FC = () => {
                       playsInline
                       preload="metadata"
                       className="w-full h-full object-cover"
-                      onPlay={pauseBackgroundMusic}
-                      onEnded={resumeBackgroundMusic}
+                      onPlay={handleVideoPlay}
+                      onPause={handleVideoPause}
+                      onEnded={handleVideoEnded}
                     >
 
                       <source
