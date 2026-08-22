@@ -5,125 +5,31 @@ import {
   GoldDivider,
   ToranArchCrest,
 } from './OrnamentalDecorations';
+import { weddingAudio } from './audioPlayer';
 
 export const VideoSection: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const musicStateRef = useRef<{
-    audio: HTMLAudioElement | null;
-    currentTime: number;
-    wasPlaying: boolean;
-  }>({
-    audio: null,
-    currentTime: 0,
-    wasPlaying: false,
-  });
-
   /*
-   * Find the existing website background music.
-   * We do not create a new audio element.
-   */
-  const getBackgroundMusic = (): HTMLAudioElement | null => {
-    const audioElements = document.querySelectorAll('audio');
-
-    if (audioElements.length === 0) {
-      return null;
-    }
-
-    return audioElements[0] as HTMLAudioElement;
-  };
-
-  /*
-   * Start website music automatically when the website opens.
-   */
-  useEffect(() => {
-    const audio = getBackgroundMusic();
-
-    if (!audio) return;
-
-    audio.volume = 1;
-
-    const tryStartMusic = () => {
-      audio.play().catch(() => {
-        // Browser may block unmuted autoplay.
-        // First user interaction will try again.
-      });
-    };
-
-    // Try immediately when website loads.
-    tryStartMusic();
-
-    // If browser blocks autoplay, start on first interaction.
-    const handleFirstInteraction = () => {
-      audio.play().catch(() => {});
-    };
-
-    window.addEventListener('pointerdown', handleFirstInteraction, {
-      once: true,
-    });
-
-    window.addEventListener('touchstart', handleFirstInteraction, {
-      once: true,
-    });
-
-    window.addEventListener('keydown', handleFirstInteraction, {
-      once: true,
-    });
-
-    return () => {
-      window.removeEventListener('pointerdown', handleFirstInteraction);
-      window.removeEventListener('touchstart', handleFirstInteraction);
-      window.removeEventListener('keydown', handleFirstInteraction);
-    };
-  }, []);
-
-  /*
-   * Pause background music when video starts.
-   * Remember the exact music position.
+   * Pause the existing wedding background music.
+   * The WeddingAudioPlayer keeps the current music position.
    */
   const pauseBackgroundMusic = () => {
-    const audio = getBackgroundMusic();
-
-    if (!audio) return;
-
-    musicStateRef.current = {
-      audio,
-      currentTime: audio.currentTime,
-      wasPlaying: !audio.paused,
-    };
-
-    if (!audio.paused) {
-      audio.pause();
-    }
+    weddingAudio.pause();
   };
 
   /*
-   * Resume background music from the same position.
+   * Resume the existing wedding background music
+   * from the position where it was paused.
    */
   const resumeBackgroundMusic = () => {
-    const {
-      audio,
-      currentTime,
-      wasPlaying,
-    } = musicStateRef.current;
-
-    if (!audio || !wasPlaying) return;
-
-    try {
-      audio.currentTime = currentTime;
-
-      audio.play().catch(() => {
-        // Browser may block playback.
-      });
-    } catch {
-      // Ignore playback errors.
-    }
+    weddingAudio.play();
   };
 
   /*
    * Start the video.
-   * Music is paused immediately.
+   * Background music is stopped immediately.
    */
   const handleStartPlay = () => {
     pauseBackgroundMusic();
@@ -131,31 +37,32 @@ export const VideoSection: React.FC = () => {
   };
 
   /*
-   * When video is displayed, make sure it starts.
+   * Once the video element is created, make sure
+   * background music stays paused while video is playing.
    */
   useEffect(() => {
     if (!isPlaying || !videoRef.current) return;
 
     const video = videoRef.current;
 
-    const handlePlay = () => {
+    const handleVideoPlay = () => {
       pauseBackgroundMusic();
     };
 
-    const handleEnded = () => {
+    const handleVideoEnded = () => {
       resumeBackgroundMusic();
     };
 
-    video.addEventListener('play', handlePlay);
-    video.addEventListener('ended', handleEnded);
+    video.addEventListener('play', handleVideoPlay);
+    video.addEventListener('ended', handleVideoEnded);
 
     video.play().catch(() => {
-      // User can use the native video controls if necessary.
+      // Native video controls remain available.
     });
 
     return () => {
-      video.removeEventListener('play', handlePlay);
-      video.removeEventListener('ended', handleEnded);
+      video.removeEventListener('play', handleVideoPlay);
+      video.removeEventListener('ended', handleVideoEnded);
     };
   }, [isPlaying]);
 
