@@ -12,7 +12,7 @@ export const FooterSection: React.FC = () => {
       try {
         await navigator.share({
           title: 'Suresh & Nandini Wedding Invitation',
-          text: 'Join us in celebrating the wedding of Suresh & Nandini on 30 August 2026 at Rajavarichinthalapalem, Nellore District!',
+          text: 'Join us in celebrating the wedding of Suresh & Nandini on 30 August 2026 at Rajuvarichinthalapalem,Kavali Nellore District!',
           url: window.location.href,
         });
       } catch {
