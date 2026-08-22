@@ -173,13 +173,13 @@ export const CountdownVenueSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Antique Gold Label Box for RAJACHINTHALAPALEM */}
+                  {/* Antique Gold Label Box for RAJUCHINTHALAPALEM */}
                   <div className="mt-2 px-4 py-2 rounded-lg bg-[#070b19]/95 backdrop-blur-md border border-[#d4af6a] shadow-[0_6px_20px_rgba(0,0,0,0.9),0_0_15px_rgba(212,175,106,0.35)] text-center">
                     <p className="font-cinzel text-xs sm:text-sm font-bold tracking-[0.22em] text-[#fcebc2] text-gold-gradient leading-none">
                       RAJACHINTHALAPALEM
                     </p>
                     <p className="font-telugu-serif text-[11px] text-[#d4af6a] mt-1 font-medium leading-none">
-                      రాజవారిచింతలపాలెం
+                      రాజువారిచింతలపాలెం
                     </p>
                   </div>
                 </div>
@@ -201,17 +201,17 @@ export const CountdownVenueSection: React.FC = () => {
               {/* Venue Name and Address in Telugu below map */}
               <div className="mt-6 text-center px-4 pb-2">
                 <h4 className="font-telugu-serif text-2xl sm:text-3xl font-bold text-gold-gradient mb-2">
-                  రాజవారిచింతలపాలెం
+                  రాజువారిచింతలపాలెం
                 </h4>
                 <p className="font-cinzel text-sm uppercase tracking-widest text-[#d4af6a] font-semibold mb-3">
-                  Rajavarichinthalapalem
+                  Rajuvarichinthalapalem
                 </p>
                 <div className="h-[1px] w-24 bg-[#d4af6a]/40 mx-auto my-3" />
                 <p className="font-telugu-serif text-base text-[#fcebc2] leading-relaxed font-medium">
-                  రాజవారిచింతలపాలెం, నెల్లూరు జిల్లా, ఆంధ్రప్రదేశ్
+                  రాజువారిచింతలపాలెం,Kavali, నెల్లూరు జిల్లా, ఆంధ్రప్రదేశ్
                 </p>
                 <p className="font-garamond text-base text-[#d4af6a]/90 mt-1 italic">
-                  Rajavarichinthalapalem, Nellore District, Andhra Pradesh
+                  Rajuvarichinthalapalem,Kavali, Nellore District, Andhra Pradesh
                 </p>
 
                 {/* Prominent Gold VIEW LOCATION Button */}
