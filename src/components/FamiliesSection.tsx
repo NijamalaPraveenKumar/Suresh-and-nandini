@@ -153,10 +153,10 @@ export const FamiliesSection: React.FC = () => {
                   <br />
                   <span className="text-sm font-normal text-[#d4af6a]">&amp;</span>
                   <br />
-                  శ్రీ రాముల
+                  శ్రీ రాములు
                 </p>
                 <p className="font-garamond text-base text-[#d4af6a]/90 italic">
-                  Smt. Kameswaramma &amp; Sri Raamula
+                  Smt. Kameswaramma &amp; Sri Raamulu
                 </p>
               </div>
             </div>
