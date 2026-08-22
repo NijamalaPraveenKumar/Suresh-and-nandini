@@ -5,7 +5,7 @@ import {
   GoldDivider,
   ToranArchCrest,
 } from './OrnamentalDecorations';
-import { weddingAudio } from './audioPlayer';
+import { weddingAudio } from '../utils/audioPlayer';
 
 export const VideoSection: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
