@@ -5,10 +5,10 @@ import { GoldDivider, CornerFlourish, ToranArchCrest } from './OrnamentalDecorat
 export const WeddingDetailsSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
-  const venueName = 'రాజవారిచింతలపాలెం';
-  const venueEnglish = 'Rajavarichinthalapalem';
-  const venueLocation = 'రాజవారిచింతలపాలెం, నెల్లూరు జిల్లా, ఆంధ్రప్రదేశ్';
-  const venueLocationEn = 'Rajavarichinthalapalem, Nellore District, Andhra Pradesh';
+  const venueName = 'రాజువారిచింతలపాలెం';
+  const venueEnglish = 'Rajuvarichinthalapalem';
+  const venueLocation = 'రాజవారిచింతలపాలెం,కావలి, నెల్లూరు జిల్లా, ఆంధ్రప్రదేశ్';
+  const venueLocationEn = 'Rajuvarichinthalapalem,kavali, Nellore District, Andhra Pradesh';
 
   const copyAddress = () => {
     navigator.clipboard.writeText(`${venueEnglish}, ${venueLocationEn}`);
