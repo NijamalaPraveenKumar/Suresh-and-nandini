@@ -7,7 +7,7 @@ export const WeddingDetailsSection: React.FC = () => {
 
   const venueName = 'రాజువారిచింతలపాలెం';
   const venueEnglish = 'Rajuvarichinthalapalem';
-  const venueLocation = 'రాజవారిచింతలపాలెం,కావలి, నెల్లూరు జిల్లా, ఆంధ్రప్రదేశ్';
+  const venueLocation = 'రాజువారిచింతలపాలెం,కావలి, నెల్లూరు జిల్లా, ఆంధ్రప్రదేశ్';
   const venueLocationEn = 'Rajuvarichinthalapalem,kavali, Nellore District, Andhra Pradesh';
 
   const copyAddress = () => {
@@ -28,7 +28,7 @@ export const WeddingDetailsSection: React.FC = () => {
       'DTSTART:20260830T043000Z', // 10:00 AM IST = 04:30 UTC
       'DTEND:20260830T080000Z',
       'SUMMARY:Suresh & Nandini Wedding Muhurtham',
-      'DESCRIPTION:Join us for the auspicious wedding ceremony of Suresh & Nandini at 10:00 AM at Rajavarichinthalapalem, Nellore District.',
+      'DESCRIPTION:Join us for the auspicious wedding ceremony of Suresh & Nandini at 10:00 AM at Rajuvarichinthalapalem,kavali, Nellore District.',
       `LOCATION:${venueEnglish}, ${venueLocationEn}`,
       'STATUS:CONFIRMED',
       'END:VEVENT',
