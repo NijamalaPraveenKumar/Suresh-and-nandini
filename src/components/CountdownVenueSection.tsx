@@ -173,10 +173,10 @@ export const CountdownVenueSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Antique Gold Label Box for RAJUCHINTHALAPALEM */}
+                  {/* Antique Gold Label Box for RAJUVARICHINTHALAPALEM */}
                   <div className="mt-2 px-4 py-2 rounded-lg bg-[#070b19]/95 backdrop-blur-md border border-[#d4af6a] shadow-[0_6px_20px_rgba(0,0,0,0.9),0_0_15px_rgba(212,175,106,0.35)] text-center">
                     <p className="font-cinzel text-xs sm:text-sm font-bold tracking-[0.22em] text-[#fcebc2] text-gold-gradient leading-none">
-                      RAJACHINTHALAPALEM
+                      RAJUVARICHINTHALAPALEM
                     </p>
                     <p className="font-telugu-serif text-[11px] text-[#d4af6a] mt-1 font-medium leading-none">
                       రాజువారిచింతలపాలెం
@@ -208,7 +208,7 @@ export const CountdownVenueSection: React.FC = () => {
                 </p>
                 <div className="h-[1px] w-24 bg-[#d4af6a]/40 mx-auto my-3" />
                 <p className="font-telugu-serif text-base text-[#fcebc2] leading-relaxed font-medium">
-                  రాజువారిచింతలపాలెం,Kavali, నెల్లూరు జిల్లా, ఆంధ్రప్రదేశ్
+                  రాజువారిచింతలపాలెం,కావలి, నెల్లూరు జిల్లా, ఆంధ్రప్రదేశ్
                 </p>
                 <p className="font-garamond text-base text-[#d4af6a]/90 mt-1 italic">
                   Rajuvarichinthalapalem,Kavali, Nellore District, Andhra Pradesh
