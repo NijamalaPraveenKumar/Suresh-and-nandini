@@ -132,7 +132,7 @@ export const CountdownVenueSection: React.FC = () => {
               <div className="relative w-full h-80 sm:h-96 rounded-xl overflow-hidden border-2 border-[#d4af6a] bg-[#070b19] shadow-[0_0_30px_rgba(212,175,106,0.35)] group">
                 {/* Embedded Interactive Google Maps styled to dark midnight navy with gold road accents */}
                 <iframe
-                  title="Venue Location - Rajachinthalapalem"
+                  title="Venue Location - Rajuchinthalapalem"
                   src="https://maps.google.com/maps?q=Rajavarichinthalapalem,+Nellore+District,+Andhra+Pradesh&t=&z=14&ie=UTF8&iwloc=&output=embed"
                   className="w-full h-full border-0 transition-opacity duration-500"
                   style={{
